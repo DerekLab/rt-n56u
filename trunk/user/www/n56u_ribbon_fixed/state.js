@@ -696,8 +696,6 @@ function show_menu(L1, L2, L3){
 		else if(!found_app_ftpd()){
 			tabtitle[5].splice(3,1);
 			tablink[5].splice(3,1);
-			menuL1_link[2] = "";
-			menuL1_title[2] = "";
 		}
 	}
 

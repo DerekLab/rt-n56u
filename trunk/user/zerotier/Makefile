@@ -3,6 +3,7 @@ THISDIR = $(shell pwd)
 FLAGS := DEFS=""
 CFLAGS := -Os -ffunction-sections -fdata-sections
 LDFLAGS := -Wl,--gc-sections,--as-needed
+DISTRO_DIR := zerotier-one
 
 all: extract_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)
@@ -22,10 +23,16 @@ clean:
 		$(MAKE) -C $(SRC_NAME) distclean ; \
 	fi ; \
 
+distro: dist
+
+dist:
+	@rm -fr /var/lib/$(DISTRO_DIR)
+	@mkdir  /var/lib/$(DISTRO_DIR)
+
 romfs:
-	$(ROMFSINST) $(THISDIR)/$(SRC_NAME)/zerotier-one /var/lib/zerotier-one/zerotier-one
-	$(ROMFSINST) $(THISDIR)/zerotier.sh /var/lib/zerotier-one/zerotier.sh
-	ln -sf zerotier-one $(ROMFSDIR)/var/lib/zerotier-one/zerotier-cli
-	ln -sf zerotier-one $(ROMFSDIR)/var/lib/zerotier-one/zerotier-idtool
+	$(ROMFSINST) $(THISDIR)/$(SRC_NAME)/zerotier-one /var/lib/$(DISTRO_DIR)/zerotier-one
+	$(ROMFSINST) $(THISDIR)/zerotier.sh /var/lib/$(DISTRO_DIR)/zerotier.sh
+	ln -sf zerotier-one $(ROMFSDIR)/var/lib/$(DISTRO_DIR)/zerotier-cli
+	ln -sf zerotier-one $(ROMFSDIR)/var/lib/$(DISTRO_DIR)/zerotier-idtool
 	cp -fP $(CONFIG_CROSS_COMPILER_ROOT)/mipsel-linux-uclibc/sysroot/lib/libstdc++.so* $(ROMFSDIR)/lib
 

@@ -23,9 +23,9 @@ clean:
 	fi ; \
 
 romfs:
-	$(ROMFSINST) $(THISDIR)/$(SRC_NAME)/zerotier-one /usr/bin/zerotier-one
-	$(ROMFSINST) $(THISDIR)/zerotier.sh /usr/bin/zerotier.sh
-	ln -sf zerotier-one $(ROMFSDIR)/usr/bin/zerotier-cli
-	ln -sf zerotier-one $(ROMFSDIR)/usr/bin/zerotier-idtool
+	$(ROMFSINST) $(THISDIR)/$(SRC_NAME)/zerotier-one /var/lib/zerotier-one/zerotier-one
+	$(ROMFSINST) $(THISDIR)/zerotier.sh /var/lib/zerotier-one/zerotier.sh
+	ln -sf zerotier-one $(ROMFSDIR)/var/lib/zerotier-one/zerotier-cli
+	ln -sf zerotier-one $(ROMFSDIR)/var/lib/zerotier-one/zerotier-idtool
 	cp -fP $(CONFIG_CROSS_COMPILER_ROOT)/mipsel-linux-uclibc/sysroot/lib/libstdc++.so* $(ROMFSDIR)/lib
 

@@ -1,3 +1,5 @@
+<table border="2">
+</table>
 新增了对交换芯片RTL8367S的支持，相关的机型为以MTK7620A/DA为主控外接交换芯片实现千兆有线的水星D12G，Tplink C5 v4等等  
 源码来自于https://gitlab.com/dm38/padavan-ng  
 相关提交为https://gitlab.com/dm38/padavan-ng/-/commit/4ec2acb96dccc268ec23aa71b8f5fcb283b9e122  

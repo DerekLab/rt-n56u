@@ -16,20 +16,29 @@ include $(ARCH_CONFIG)
 
 INSTALLDIR = $(ROOTDIR)/romfs
 
+STORAGE_ENABLED=n
 FS_EXT_ENABLED=n
 FS_FAT_ENABLED=n
-FS_NTFS_ENABLED=n
-STORAGE_ENABLED=n
+OPENSSH_ENABLED=n
+DROPBEAR_ENABLED=n
 SAMBA_ENABLED=n
-ARIA2_ENABLED=n
-SOFTETHERVPN_ENABLE=n
-SHADOWSOCKS_ENABLE=n
-FRP_ENABLE=n
-TROJAN_ENABLE=n
+IGMP_ENABLE=n
+XFRM_ENABLE=n
 OPT_ENABLED=n
+VPN_WEB_ENABLE=n
+FRP_ENABLE=n
+SHADOWSOCKS_ENABLE=n
+SOFTETHERVPN_ENABLE=n
 
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_WINS),y)
-SAMBA_ENABLED=y
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
+DROPBEAR_ENABLED=y
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_SFTP),y)
+OPENSSH_ENABLED=y
+endif
+endif
+else
+OPENSSH_ENABLED=y
 endif
 
 ifdef CONFIG_MMC_BLOCK
@@ -55,20 +64,20 @@ endif
 ifeq ($(CONFIG_FIRMWARE_ENABLE_EXFAT),y)
 FS_FAT_ENABLED=y
 endif
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_NTFS_3G),y)
-FS_NTFS_ENABLED=y
-endif
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_SMBD),y)
+SAMBA_ENABLED=y
+endif
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_WINS),y)
 SAMBA_ENABLED=y
 endif
 endif
 
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_ARIA),y)
-ARIA2_ENABLED=y
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_IGMP),y)
+IGMP_ENABLE=y
 endif
 
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_REDSOCKS),y)
-REDSOCKS_ENABLED=y
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_XFRM),y)
+XFRM_ENABLE=y
 endif
 
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_OPTWARE),y)
@@ -85,10 +94,6 @@ endif
 
 ifneq ($(filter y,$(CONFIG_FIRMWARE_INCLUDE_FRPC) $(CONFIG_FIRMWARE_INCLUDE_FRPS)),)
 FRP_ENABLE=y
-endif
-
-ifneq ($(filter y,$(CONFIG_FIRMWARE_INCLUDE_WING) $(CONFIG_FIRMWARE_INCLUDE_TROJAN)),)
-TROJAN_ENABLE=y
 endif
 
 dir_y =
@@ -120,8 +125,6 @@ dir_y							+= infosvr
 dir_y							+= inadyn
 dir_y							+= miniupnpd
 dir_y							+= dnsmasq
-dir_y							+= igmpproxy
-dir_y							+= udpxy
 dir_y							+= utils
 dir_y							+= lanauth
 dir_y							+= 802.1x
@@ -139,6 +142,24 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)              += resolveip
 dir_$(CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME)      	+= adguardhome
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)	        += dns2tcp
 
+
+
+
+
+
+
+
+
+ifeq ($(IGMP_ENABLE),y)
+dir_y							+= igmpproxy
+dir_y							+= udpxy
+dir_y							+= xupnpd
+endif
+
+ifeq ($(XFRM_ENABLE),y)
+dir_$(CONFIG_FIRMWARE_INCLUDE_SSWAN)			+= strongswan
+endif
+
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS),y)
 dir_$(CONFIG_FIRMWARE_INCLUDE_V2RAY)	        += v2ray
 dir_$(CONFIG_FIRMWARE_INCLUDE_XRAY)	        += xray
@@ -147,12 +168,11 @@ endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)			+= simple-obfs
 dir_$(CONFIG_FIRMWARE_INCLUDE_ZEROTIER)			+= zerotier
 dir_$(CONFIG_FIRMWARE_INCLUDE_WYY)			+= unblockmusic
-
+dir_$(OPENSSH_ENABLED)					+= openssh
+dir_$(DROPBEAR_ENABLED)					+= dropbear
 dir_$(CONFIG_FIRMWARE_INCLUDE_HTOP)			+= htop
 dir_$(CONFIG_FIRMWARE_INCLUDE_NANO)			+= nano
 dir_$(CONFIG_FIRMWARE_INCLUDE_OPENVPN)			+= openvpn
-dir_$(CONFIG_FIRMWARE_INCLUDE_SSWAN)			+= strongswan
-dir_$(CONFIG_FIRMWARE_INCLUDE_XUPNPD)			+= xupnpd
 dir_$(CONFIG_FIRMWARE_INCLUDE_TCPDUMP)			+= tcpdump
 dir_$(CONFIG_FIRMWARE_INCLUDE_MTR)			+= mtr
 dir_$(CONFIG_FIRMWARE_INCLUDE_SOCAT)			+= socat
@@ -168,18 +188,6 @@ dir_y							+= wsdd2
 else
 dir_$(SAMBA_ENABLED)					+= samba3
 endif
-
-ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
-dir_y							+= dropbear
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_SFTP),y)
-dir_y							+= openssh
-endif
-endif
-else
-dir_y							+= openssh
-endif
-
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= chnroute
 dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)			+= ttyd
 dir_$(FRP_ENABLE)					+= frp
@@ -230,13 +238,13 @@ dir_y							+= util-linux
 endif
 dir_$(FS_EXT_ENABLED)					+= e2fsprogs
 dir_$(FS_FAT_ENABLED)					+= dosfstools
-dir_$(FS_NTFS_ENABLED)					+= ntfs-3g
+dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)					+= ntfs-3g
 dir_$(CONFIG_FIRMWARE_INCLUDE_PARTED)			+= parted
 dir_$(CONFIG_FIRMWARE_INCLUDE_FTPD)			+= vsftpd
 dir_$(CONFIG_FIRMWARE_INCLUDE_MINIDLNA)			+= minidlna
 dir_$(CONFIG_FIRMWARE_INCLUDE_FIREFLY)			+= firefly
 dir_$(CONFIG_FIRMWARE_INCLUDE_TRANSMISSION)		+= transmission
-dir_$(ARIA2_ENABLED)					+= aria2
+dir_$(CONFIG_FIRMWARE_INCLUDE_ARIA)					+= aria2
 endif
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_KOOLPROXY)		+= koolproxy

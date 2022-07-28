@@ -132,7 +132,7 @@ dir_$(OPENSSH_ENABLED)					+= openssh
 dir_$(DROPBEAR_ENABLED)					+= dropbear
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_ANTFS)			+= antfs
-dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)			+= ntfs-3g
+dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)					+= ntfs-3g
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_MTR)			+= mtr
 dir_$(CONFIG_FIRMWARE_INCLUDE_HTOP)			+= htop
@@ -160,7 +160,20 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_INADYN)			+= inadyn
 dir_$(CONFIG_FIRMWARE_INCLUDE_ALIDDNS)			+= aliddns
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_SFE)			+= shortcut-fe
-dir_y							+= infosvr
+dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)			+= ttyd
+dir_$(CONFIG_FIRMWARE_INCLUDE_LLDT)				+= lldt
+dir_$(CONFIG_FIRMWARE_INCLUDE_VLMCSD)			+= vlmcsd
+dir_$(CONFIG_FIRMWARE_INCLUDE_INFOSVR)			+= infosvr
+dir_$(CONFIG_FIRMWARE_INCLUDE_NVPPROXY)			+= nvpproxy
+dir_$(CONFIG_FIRMWARE_INCLUDE_ZEROTIER)			+= zerotier
+dir_$(CONFIG_FIRMWARE_INCLUDE_WYY)			+= unblockmusic
+dir_$(CONFIG_FIRMWARE_INCLUDE_CADDY)			+= caddy
+
+ifeq ($(IGMP_ENABLE),y)
+dir_y							+= igmpproxy
+dir_y							+= udpxy
+dir_y							+= xupnpd
+endif
 
 ifneq ($(CONFIG_WITHOUT_KERNEL),y)
 dir_y							+= accel-pptpd
@@ -168,7 +181,7 @@ endif
 
 dir_y							+= xl2tpd
 dir_$(CONFIG_FIRMWARE_INCLUDE_RPL2TP)			+= rp-l2tp
-dir_y							+= lldt
+
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= skipdbv2
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= lua51
@@ -176,11 +189,7 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= ipt2socks
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)              += resolveip
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)	        += dns2tcp
 
-ifeq ($(IGMP_ENABLE),y)
-dir_y							+= igmpproxy
-dir_y							+= udpxy
-dir_y							+= xupnpd
-endif
+
 
 ifeq ($(XFRM_ENABLE),y)
 dir_$(CONFIG_FIRMWARE_INCLUDE_SSWAN)			+= strongswan
@@ -192,8 +201,7 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_XRAY)	        += xray
 dir_$(CONFIG_FIRMWARE_INCLUDE_TROJAN)	        += trojan
 endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)			+= simple-obfs
-dir_$(CONFIG_FIRMWARE_INCLUDE_ZEROTIER)			+= zerotier
-dir_$(CONFIG_FIRMWARE_INCLUDE_WYY)			+= unblockmusic
+
 
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_OPENVPN)			+= openvpn
@@ -212,10 +220,10 @@ else
 dir_$(SAMBA_ENABLED)					+= samba3
 endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= chnroute
-dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)			+= ttyd
+
 dir_$(SOFTETHERVPN_ENABLE)				+= softethervpn
 
-dir_$(CONFIG_FIRMWARE_INCLUDE_VLMCSD)			+= vlmcsd
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER)		+= dns-forwarder
 dir_$(SHADOWSOCKS_ENABLE)				+= shadowsocks
 
@@ -223,7 +231,7 @@ dir_$(SHADOWSOCKS_ENABLE)				+= shadowsocks
 
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_SMARTDNS)			+= smartdns
-dir_$(CONFIG_FIRMWARE_INCLUDE_CADDY)			+= caddy
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_xTUN) 			+= xTun
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_WING),y)
 dir_y 			+= wing
@@ -267,7 +275,7 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_TRANSMISSION)		+= transmission
 dir_$(CONFIG_FIRMWARE_INCLUDE_ARIA)					+= aria2
 endif
 
-dir_$(CONFIG_FIRMWARE_INCLUDE_NVPPROXY)			+= nvpproxy
+
 
 ifdef CONFIG_MTD_UBI
 ifneq ($(STORAGE_ENABLED),y)

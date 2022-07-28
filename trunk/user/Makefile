@@ -44,6 +44,7 @@ endif
 ifdef CONFIG_MMC_BLOCK
 STORAGE_ENABLED=y
 endif
+
 ifdef CONFIG_BLK_DEV_SD
 STORAGE_ENABLED=y
 endif
@@ -131,19 +132,37 @@ dir_$(OPENSSH_ENABLED)					+= openssh
 dir_$(DROPBEAR_ENABLED)					+= dropbear
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_ANTFS)			+= antfs
-dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)					+= ntfs-3g
+dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)			+= ntfs-3g
 
-
+dir_$(CONFIG_FIRMWARE_INCLUDE_MTR)			+= mtr
+dir_$(CONFIG_FIRMWARE_INCLUDE_HTOP)			+= htop
+dir_$(CONFIG_FIRMWARE_INCLUDE_NANO)			+= nano
+dir_$(CONFIG_FIRMWARE_INCLUDE_IPSET)			+= ipset
+dir_$(CONFIG_FIRMWARE_INCLUDE_LRZSZ)			+= lrzsz
+dir_$(CONFIG_FIRMWARE_INCLUDE_IPERF3)			+= iperf3
+dir_$(CONFIG_FIRMWARE_INCLUDE_TCPDUMP)			+= tcpdump
 dir_$(CONFIG_FIRMWARE_INCLUDE_COREMARK)			+= coremark
 
+dir_$(CONFIG_FIRMWARE_INCLUDE_ADBYBY)			+= adbyby
+dir_$(CONFIG_FIRMWARE_INCLUDE_KOOLPROXY)		+= koolproxy
+dir_$(CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME)      	+= adguardhome
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_NAPT66)			+= napt66
+dir_$(CONFIG_FIRMWARE_INCLUDE_DOGCOM)			+= dogcom
+dir_$(CONFIG_FIRMWARE_INCLUDE_MINIEAP)			+= minieap
+dir_$(CONFIG_FIRMWARE_INCLUDE_MENTOHUST)		+= mentohust
+dir_$(CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT)		+= scutclient
+dir_$(CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM)		+= gdut-drcom
+dir_$(CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT)		+= njit-client
+
+dir_$(FRP_ENABLE)					+= frp
+dir_$(CONFIG_FIRMWARE_INCLUDE_INADYN)			+= inadyn
+dir_$(CONFIG_FIRMWARE_INCLUDE_ALIDDNS)			+= aliddns
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_SFE)			+= shortcut-fe
 dir_y							+= infosvr
-dir_y							+= inadyn
 
 ifneq ($(CONFIG_WITHOUT_KERNEL),y)
-dir_$(CONFIG_FIRMWARE_INCLUDE_IPSET)			+= ipset
 dir_y							+= accel-pptpd
 endif
 
@@ -155,7 +174,6 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= skipdbv2
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= lua51
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= ipt2socks
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)              += resolveip
-dir_$(CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME)      	+= adguardhome
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)	        += dns2tcp
 
 ifeq ($(IGMP_ENABLE),y)
@@ -177,11 +195,9 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)			+= simple-obfs
 dir_$(CONFIG_FIRMWARE_INCLUDE_ZEROTIER)			+= zerotier
 dir_$(CONFIG_FIRMWARE_INCLUDE_WYY)			+= unblockmusic
 
-dir_$(CONFIG_FIRMWARE_INCLUDE_HTOP)			+= htop
-dir_$(CONFIG_FIRMWARE_INCLUDE_NANO)			+= nano
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_OPENVPN)			+= openvpn
-dir_$(CONFIG_FIRMWARE_INCLUDE_TCPDUMP)			+= tcpdump
-dir_$(CONFIG_FIRMWARE_INCLUDE_MTR)			+= mtr
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_SOCAT)			+= socat
 dir_$(CONFIG_FIRMWARE_INCLUDE_SRELAY)			+= srelay
 dir_$(CONFIG_FIRMWARE_INCLUDE_TUNSAFE)			+= tunsafe
@@ -197,19 +213,15 @@ dir_$(SAMBA_ENABLED)					+= samba3
 endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= chnroute
 dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)			+= ttyd
-dir_$(FRP_ENABLE)					+= frp
 dir_$(SOFTETHERVPN_ENABLE)				+= softethervpn
-dir_$(CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT)		+= scutclient
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_VLMCSD)			+= vlmcsd
 dir_$(CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER)		+= dns-forwarder
 dir_$(SHADOWSOCKS_ENABLE)				+= shadowsocks
-dir_$(CONFIG_FIRMWARE_INCLUDE_LRZSZ)			+= lrzsz
-dir_$(CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM)		+= gdut-drcom
-dir_$(CONFIG_FIRMWARE_INCLUDE_DOGCOM)			+= dogcom
-dir_$(CONFIG_FIRMWARE_INCLUDE_IPERF3)			+= iperf3
-dir_$(CONFIG_FIRMWARE_INCLUDE_MINIEAP)			+= minieap
-dir_$(CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT)		+= njit-client
-dir_$(CONFIG_FIRMWARE_INCLUDE_MENTOHUST)		+= mentohust
+
+
+
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_SMARTDNS)			+= smartdns
 dir_$(CONFIG_FIRMWARE_INCLUDE_CADDY)			+= caddy
 dir_$(CONFIG_FIRMWARE_INCLUDE_xTUN) 			+= xTun
@@ -255,9 +267,6 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_TRANSMISSION)		+= transmission
 dir_$(CONFIG_FIRMWARE_INCLUDE_ARIA)					+= aria2
 endif
 
-dir_$(CONFIG_FIRMWARE_INCLUDE_KOOLPROXY)		+= koolproxy
-dir_$(CONFIG_FIRMWARE_INCLUDE_ADBYBY)			+= adbyby
-dir_$(CONFIG_FIRMWARE_INCLUDE_ALIDDNS)			+= aliddns
 dir_$(CONFIG_FIRMWARE_INCLUDE_NVPPROXY)			+= nvpproxy
 
 ifdef CONFIG_MTD_UBI

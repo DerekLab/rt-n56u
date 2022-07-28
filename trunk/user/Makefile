@@ -28,6 +28,7 @@ SOFTETHERVPN_ENABLE=n
 SHADOWSOCKS_ENABLE=n
 FRP_ENABLE=n
 TROJAN_ENABLE=n
+OPT_ENABLED=n
 
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
@@ -81,6 +82,10 @@ endif
 
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_REDSOCKS),y)
 REDSOCKS_ENABLED=y
+endif
+
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_OPTWARE),y)
+OPT_ENABLED=y
 endif
 
 ifneq ($(filter y,$(CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD) $(CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT) $(CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER)),)
@@ -221,8 +226,10 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_NFSD)			+= nfs-utils
 ifneq (,$(filter y,$(CONFIG_FIRMWARE_INCLUDE_NFSD) $(CONFIG_FIRMWARE_INCLUDE_NFSC)))
 dir_y							+= rpcbind
 endif
+ifeq ($(OPT_ENABLED),y)
 dir_y							+= optware
 dir_y							+= util-linux
+endif
 dir_$(FS_EXT_ENABLED)					+= e2fsprogs
 dir_$(FS_FAT_ENABLED)					+= dosfstools
 dir_$(FS_NTFS_ENABLED)					+= ntfs-3g
@@ -238,10 +245,13 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_KOOLPROXY)		+= koolproxy
 dir_$(CONFIG_FIRMWARE_INCLUDE_ADBYBY)			+= adbyby
 dir_$(CONFIG_FIRMWARE_INCLUDE_ALIDDNS)			+= aliddns
 dir_$(CONFIG_FIRMWARE_INCLUDE_NVPPROXY)			+= nvpproxy
+
 ifdef CONFIG_MTD_UBI
 ifneq ($(STORAGE_ENABLED),y)
+ifeq ($(OPT_ENABLED),y)
 dir_y							+= optware
 dir_y							+= util-linux
+endif
 endif
 dir_y							+= mtd-utils
 endif

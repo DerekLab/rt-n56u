@@ -20,8 +20,6 @@ FS_EXT_ENABLED=n
 FS_FAT_ENABLED=n
 FS_NTFS_ENABLED=n
 STORAGE_ENABLED=n
-OPENSSH_ENABLED=n
-DROPBEAR_ENABLED=n
 SAMBA_ENABLED=n
 ARIA2_ENABLED=n
 SOFTETHERVPN_ENABLE=n
@@ -29,17 +27,6 @@ SHADOWSOCKS_ENABLE=n
 FRP_ENABLE=n
 TROJAN_ENABLE=n
 OPT_ENABLED=n
-
-ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
-DROPBEAR_ENABLED=y
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_SFTP),y)
-OPENSSH_ENABLED=y
-endif
-endif
-else
-OPENSSH_ENABLED=y
-endif
 
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_WINS),y)
 SAMBA_ENABLED=y
@@ -160,8 +147,7 @@ endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)			+= simple-obfs
 dir_$(CONFIG_FIRMWARE_INCLUDE_ZEROTIER)			+= zerotier
 dir_$(CONFIG_FIRMWARE_INCLUDE_WYY)			+= unblockmusic
-dir_$(OPENSSH_ENABLED)					+= openssh
-dir_$(DROPBEAR_ENABLED)					+= dropbear
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_HTOP)			+= htop
 dir_$(CONFIG_FIRMWARE_INCLUDE_NANO)			+= nano
 dir_$(CONFIG_FIRMWARE_INCLUDE_OPENVPN)			+= openvpn
@@ -182,6 +168,18 @@ dir_y							+= wsdd2
 else
 dir_$(SAMBA_ENABLED)					+= samba3
 endif
+
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
+dir_y							+= dropbear
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_SFTP),y)
+dir_y							+= openssh
+endif
+endif
+else
+dir_y							+= openssh
+endif
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= chnroute
 dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)			+= ttyd
 dir_$(FRP_ENABLE)					+= frp

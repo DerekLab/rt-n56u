@@ -17,6 +17,8 @@ include $(ARCH_CONFIG)
 INSTALLDIR = $(ROOTDIR)/romfs
 
 STORAGE_ENABLED=n
+OPENSSH_ENABLED=n
+DROPBEAR_ENABLED=n
 FS_EXT_ENABLED=n
 FS_FAT_ENABLED=n
 SAMBA_ENABLED=n
@@ -27,6 +29,17 @@ VPN_WEB_ENABLE=n
 FRP_ENABLE=n
 SHADOWSOCKS_ENABLE=n
 SOFTETHERVPN_ENABLE=n
+
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
+DROPBEAR_ENABLED=y
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_SFTP),y)
+OPENSSH_ENABLED=y
+endif
+endif
+else
+OPENSSH_ENABLED=y
+endif
 
 ifdef CONFIG_MMC_BLOCK
 STORAGE_ENABLED=y
@@ -116,16 +129,8 @@ dir_y							+= pppd
 dir_y							+= pppoe
 dir_y							+= scripts
 
-ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
-dir_y					+= dropbear
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_SFTP),y)
-dir_y					+= openssh
-endif
-endif
-else
-dir_y					+= openssh
-endif
+dir_$(OPENSSH_ENABLED)					+= openssh
+dir_$(DROPBEAR_ENABLED)					+= dropbear
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_ANTFS)			+= antfs
 dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)			+= ntfs-3g

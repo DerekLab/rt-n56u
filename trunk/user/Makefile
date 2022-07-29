@@ -175,25 +175,34 @@ dir_y							+= udpxy
 dir_y							+= xupnpd
 endif
 
-ifneq ($(CONFIG_WITHOUT_KERNEL),y)
+ifeq ($(VPN_WEB_ENABLE),y)
 dir_y							+= accel-pptpd
-endif
-
 dir_y							+= xl2tpd
 dir_$(CONFIG_FIRMWARE_INCLUDE_RPL2TP)			+= rp-l2tp
+dir_$(CONFIG_FIRMWARE_INCLUDE_OPENVPN)			+= openvpn
+endif
 
+ifeq ($(XFRM_ENABLE),y)
+dir_$(CONFIG_FIRMWARE_INCLUDE_SSWAN)			+= strongswan
+endif
+
+ifeq ($(SOFTETHERVPN_ENABLE),y)
+dir_y							+= softethervpn
+endif
+
+dir_$(CONFIG_FIRMWARE_INCLUDE_TUNSAFE)			+= tunsafe
+dir_$(CONFIG_FIRMWARE_INCLUDE_xTUN) 			+= xTun
+
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_WIREGUARD),y)
+dir_y 							+= wireguard-go
+dir_y 							+= wireguard-tools
+endif
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= skipdbv2
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= lua51
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= ipt2socks
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)              += resolveip
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)	        += dns2tcp
-
-
-
-ifeq ($(XFRM_ENABLE),y)
-dir_$(CONFIG_FIRMWARE_INCLUDE_SSWAN)			+= strongswan
-endif
 
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS),y)
 dir_$(CONFIG_FIRMWARE_INCLUDE_V2RAY)	        += v2ray
@@ -202,17 +211,9 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_TROJAN)	        += trojan
 endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)			+= simple-obfs
 
-
-
-dir_$(CONFIG_FIRMWARE_INCLUDE_OPENVPN)			+= openvpn
-
 dir_$(CONFIG_FIRMWARE_INCLUDE_SOCAT)			+= socat
 dir_$(CONFIG_FIRMWARE_INCLUDE_SRELAY)			+= srelay
-dir_$(CONFIG_FIRMWARE_INCLUDE_TUNSAFE)			+= tunsafe
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_WIREGUARD),y)
-dir_y += wireguard-go
-dir_y += wireguard-tools
-endif
+
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_SMBD36),y)
 dir_$(SAMBA_ENABLED)					+= samba36
 dir_y							+= wsdd2
@@ -220,9 +221,6 @@ else
 dir_$(SAMBA_ENABLED)					+= samba3
 endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= chnroute
-
-dir_$(SOFTETHERVPN_ENABLE)				+= softethervpn
-
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER)		+= dns-forwarder
 dir_$(SHADOWSOCKS_ENABLE)				+= shadowsocks
@@ -232,7 +230,6 @@ dir_$(SHADOWSOCKS_ENABLE)				+= shadowsocks
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_SMARTDNS)			+= smartdns
 
-dir_$(CONFIG_FIRMWARE_INCLUDE_xTUN) 			+= xTun
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_WING),y)
 dir_y 			+= wing
 dir_y 			+= ipt2socks

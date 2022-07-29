@@ -214,19 +214,11 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)			+= simple-obfs
 dir_$(CONFIG_FIRMWARE_INCLUDE_SOCAT)			+= socat
 dir_$(CONFIG_FIRMWARE_INCLUDE_SRELAY)			+= srelay
 
-ifeq ($(CONFIG_FIRMWARE_INCLUDE_SMBD36),y)
-dir_$(SAMBA_ENABLED)					+= samba36
-dir_y							+= wsdd2
-else
-dir_$(SAMBA_ENABLED)					+= samba3
-endif
+
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)		+= chnroute
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER)		+= dns-forwarder
 dir_$(SHADOWSOCKS_ENABLE)				+= shadowsocks
-
-
-
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_SMARTDNS)			+= smartdns
 
@@ -237,10 +229,6 @@ endif
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_REDSOCKS)			+= redsocks
 dir_$(CONFIG_FIRMWARE_INCLUDE_3PROXY)			+= 3proxy
-
-ifdef CONFIG_BLK_DEV_SD
-dir_$(CONFIG_FIRMWARE_INCLUDE_HDPARM)			+= hdparm
-endif
 
 ifdef CONFIG_USB_SUPPORT
 dir_y							+= usb-modeswitch
@@ -253,26 +241,30 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_DUMP1090)			+= dump1090
 endif
 
 ifeq ($(STORAGE_ENABLED),y)
-dir_$(CONFIG_FIRMWARE_INCLUDE_NFSD)			+= nfs-utils
-ifneq (,$(filter y,$(CONFIG_FIRMWARE_INCLUDE_NFSD) $(CONFIG_FIRMWARE_INCLUDE_NFSC)))
-dir_y							+= rpcbind
-endif
-ifeq ($(OPT_ENABLED),y)
-dir_y							+= optware
-dir_y							+= util-linux
-endif
 dir_$(FS_EXT_ENABLED)					+= e2fsprogs
 dir_$(FS_FAT_ENABLED)					+= dosfstools
-
+dir_$(CONFIG_FIRMWARE_INCLUDE_HDPARM)			+= hdparm
 dir_$(CONFIG_FIRMWARE_INCLUDE_PARTED)			+= parted
 dir_$(CONFIG_FIRMWARE_INCLUDE_FTPD)			+= vsftpd
 dir_$(CONFIG_FIRMWARE_INCLUDE_MINIDLNA)			+= minidlna
 dir_$(CONFIG_FIRMWARE_INCLUDE_FIREFLY)			+= firefly
 dir_$(CONFIG_FIRMWARE_INCLUDE_TRANSMISSION)		+= transmission
-dir_$(CONFIG_FIRMWARE_INCLUDE_ARIA)					+= aria2
+dir_$(CONFIG_FIRMWARE_INCLUDE_ARIA)			+= aria2
+ifeq ($(OPT_ENABLED),y)
+dir_y							+= optware
+dir_y							+= util-linux
 endif
-
-
+dir_$(CONFIG_FIRMWARE_INCLUDE_NFSD)			+= nfs-utils
+ifneq (,$(filter y,$(CONFIG_FIRMWARE_INCLUDE_NFSD) $(CONFIG_FIRMWARE_INCLUDE_NFSC)))
+dir_y							+= rpcbind
+endif
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_SMBD36),y)
+dir_$(SAMBA_ENABLED)					+= samba36
+dir_y							+= wsdd2
+else
+dir_$(SAMBA_ENABLED)					+= samba3
+endif
+endif
 
 ifdef CONFIG_MTD_UBI
 ifneq ($(STORAGE_ENABLED),y)

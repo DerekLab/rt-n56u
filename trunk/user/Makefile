@@ -132,7 +132,7 @@ dir_$(OPENSSH_ENABLED)					+= openssh
 dir_$(DROPBEAR_ENABLED)					+= dropbear
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_ANTFS)			+= antfs
-dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)					+= ntfs-3g
+dir_$(CONFIG_FIRMWARE_INCLUDE_NTFS_3G)			+= ntfs-3g
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_MTR)			+= mtr
 dir_$(CONFIG_FIRMWARE_INCLUDE_HTOP)			+= htop
@@ -219,7 +219,7 @@ dir_y							+= skipdbv2
 dir_y							+= lua51
 dir_y							+= ipt2socks
 dir_y      						+= resolveip
-dir_y	    					+= dns2tcp
+dir_y	    						+= dns2tcp
 dir_y							+= chnroute
 dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)			+= simple-obfs
 dir_$(CONFIG_FIRMWARE_INCLUDE_V2RAY)	        	+= v2ray
@@ -233,10 +233,6 @@ dir_$(SAMBA_ENABLED)					+= samba36
 dir_y							+= wsdd2
 else
 dir_$(SAMBA_ENABLED)					+= samba3
-endif
-
-ifdef CONFIG_BLK_DEV_SD
-dir_$(CONFIG_FIRMWARE_INCLUDE_HDPARM)			+= hdparm
 endif
 
 ifdef CONFIG_USB_SUPPORT
@@ -260,13 +256,13 @@ dir_y							+= util-linux
 endif
 dir_$(FS_EXT_ENABLED)					+= e2fsprogs
 dir_$(FS_FAT_ENABLED)					+= dosfstools
-
+dir_$(CONFIG_FIRMWARE_INCLUDE_HDPARM)			+= hdparm
 dir_$(CONFIG_FIRMWARE_INCLUDE_PARTED)			+= parted
 dir_$(CONFIG_FIRMWARE_INCLUDE_FTPD)			+= vsftpd
 dir_$(CONFIG_FIRMWARE_INCLUDE_MINIDLNA)			+= minidlna
 dir_$(CONFIG_FIRMWARE_INCLUDE_FIREFLY)			+= firefly
 dir_$(CONFIG_FIRMWARE_INCLUDE_TRANSMISSION)		+= transmission
-dir_$(CONFIG_FIRMWARE_INCLUDE_ARIA)					+= aria2
+dir_$(CONFIG_FIRMWARE_INCLUDE_ARIA)			+= aria2
 endif
 
 

@@ -27,3 +27,16 @@ https://github.com/immortalwrt/padavan
 wifi密码1234567890  
 管理地址192.168.123.1  
 管理账号密码都是admin  
+
+
+\rt-n56u\trunk\linux-3.4.x\arch\mips\rt2880\init.c中找到关键字“CONFIG_RALINK_MT7621_PLL900”的位置，修改添加红色部分代码:
+                reg = (*(volatile u32 *)(RALINK_MEMCTRL_BASE + 0x648));
+#if defined(CONFIG_RALINK_MT7621_PLL900)
+                <font color=red>if ((reg & 0x7ff) != 0x362) {</font>
+                        <font color=red>reg &= ~(0x7ff);</font>
+                        <font color=red>reg |=  (0x362);</font>
+                        (*((volatile u32 *)(RALINK_MEMCTRL_BASE + 0x648))) = reg;
+                        udelay(10);
+                }
+#endif
+将原代码改为上面红色字体三行代码，其中"0x362"这个位置的值，对应的是1100Mhz的频率设置

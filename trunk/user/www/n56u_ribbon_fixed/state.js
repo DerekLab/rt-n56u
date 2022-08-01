@@ -640,8 +640,8 @@ function show_menu(L1, L2, L3){
 			tabtitle[3].splice(2,1);
 		}
 		if(!found_app_inadyn()){
-			tablink[3].splice(4,1);
-			tabtitle[3].splice(4,1);
+			tablink[3].splice(5,1);
+			tabtitle[3].splice(5,1);
 		}
 	}
 

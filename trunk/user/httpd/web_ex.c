@@ -2573,6 +2573,11 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_frp = 0;
 #endif
+#if defined(APP_INADYN)
+	int found_app_inadyn = 1;
+#else
+	int found_app_inadyn = 0;
+#endif
 #if defined(APP_ALIDDNS)
 	int found_app_aliddns = 1;
 #else

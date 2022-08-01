@@ -205,9 +205,6 @@ ifeq ($(CONFIG_FIRMWARE_WEBUI_HIDE_VPN),y)
 	rm -f $(INSTALLDIR)/www/vpncli.asp
 	rm -f $(INSTALLDIR)/www/vpnsrv.asp
 endif
-ifneq ($(CONFIG_FIRMWARE_INCLUDE_PRINT),y)
-	rm -f $(INSTALLDIR)/www/Advanced_Printer_others.asp
-endif
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_ADBYBY),y)
 	rm -f $(INSTALLDIR)/www/Advanced_adbyby.asp
 endif

@@ -113,13 +113,13 @@ dir_y							+= scripts
 
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
-dir_y					+= dropbear
+dir_y							+= dropbear
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_SFTP),y)
-dir_y					+= openssh
+dir_y							+= openssh
 endif
 endif
 else
-dir_y					+= openssh
+dir_y							+= openssh
 endif
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_ANTFS)			+= antfs
@@ -152,7 +152,7 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_ALIDDNS)			+= aliddns
 
 dir_$(CONFIG_FIRMWARE_INCLUDE_SFE)			+= shortcut-fe
 dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)			+= ttyd
-dir_$(CONFIG_FIRMWARE_INCLUDE_LLDT)				+= lldt
+dir_$(CONFIG_FIRMWARE_INCLUDE_LLDT)			+= lldt
 dir_$(CONFIG_FIRMWARE_INCLUDE_VLMCSD)			+= vlmcsd
 dir_$(CONFIG_FIRMWARE_INCLUDE_INFOSVR)			+= infosvr
 dir_$(CONFIG_FIRMWARE_INCLUDE_NVPPROXY)			+= nvpproxy

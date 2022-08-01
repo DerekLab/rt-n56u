@@ -639,6 +639,10 @@ function show_menu(L1, L2, L3){
 			tablink[3].splice(2,1);
 			tabtitle[3].splice(2,1);
 		}
+		if(!found_app_inadyn()){
+			tablink[3].splice(4,1);
+			tabtitle[3].splice(4,1);
+		}
 	}
 
 	for (i=0;i<num_ephy;i++){

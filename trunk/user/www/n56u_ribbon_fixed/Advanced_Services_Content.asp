@@ -98,6 +98,9 @@ function initial(){
 	if(!found_app_lltd()){
 		showhide_div('div_lltd', 0);
 	}
+	if(!found_app_infosvr()){
+		showhide_div('div_infosvr', 0);
+	}
 }
 
 function applyRule(){
@@ -592,7 +595,8 @@ function on_ttyd_link(){
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
+					
+                                        <tr id="div_infosvr">
                                             <th><#Adm_Svc_adsc#></th>
                                             <td>
                                                 <div class="main_itoggle">
@@ -606,6 +610,7 @@ function on_ttyd_link(){
                                                 </div>
                                             </td>
                                         </tr>
+					
                                         <tr>
                                             <th><#Adm_Svc_crond#></th>
                                             <td>

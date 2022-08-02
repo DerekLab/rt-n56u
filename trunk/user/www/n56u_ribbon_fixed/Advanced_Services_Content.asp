@@ -94,6 +94,10 @@ function initial(){
 	if(!found_app_napt66()){
 		showhide_div('div_napt66', 0);
 	}
+	
+	if(!found_app_lltd()){
+		showhide_div('div_lltd', 0);
+	}
 }
 
 function applyRule(){
@@ -574,7 +578,7 @@ function on_ttyd_link(){
                                             </td>
                                         </tr>
 
-                                        <tr>
+                                        <tr id="div_lltd">
                                             <th><#Adm_Svc_lltd#></th>
                                             <td>
                                                 <div class="main_itoggle">

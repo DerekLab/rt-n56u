@@ -2608,6 +2608,11 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int has_ipv6 = 0;
 #endif
+#if defined(SUPPORT_PRINT)
+	int has_print = 1;
+#else
+	int has_print = 0;
+#endif
 
 #if defined(USE_HW_NAT)
 	int has_ipv4_ppe = 1;
@@ -2829,6 +2834,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 	);
 
 	websWrite(wp,
+		"function support_print() { return %d;}\n"
 		"function support_ipv6() { return %d;}\n"
 		"function support_ipv6_ppe() { return %d;}\n"
 		"function support_ipv4_ppe() { return %d;}\n"
@@ -2868,6 +2874,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function support_5g_160mhz() { return %d;}\n"
 		"function support_5g_11ax() { return %d;}\n"
 		"function support_2g_11ax() { return %d;}\n",
+		has_print,
 		has_ipv6,
 		has_ipv6_ppe,
 		has_ipv4_ppe,

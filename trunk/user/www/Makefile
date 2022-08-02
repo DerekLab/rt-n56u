@@ -230,6 +230,12 @@ ifeq ($(CONFIG_FIRMWARE_INCLUDE_FRPC)_$(CONFIG_FIRMWARE_INCLUDE_FRPS), n_n)
 	rm -f $(INSTALLDIR)/www/Advanced_frp.asp
 	rm -f $(INSTALLDIR)/www/Advanced_frp_log.asp
 endif
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_PRINT),y)
+	rm -f $(INSTALLDIR)/www/Advanced_Printer_others.asp
+endif
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_INADYN),y)
+	rm -f $(INSTALLDIR)/www/Advanced_DDNS_Content.asp
+endif
 
 
 clean:

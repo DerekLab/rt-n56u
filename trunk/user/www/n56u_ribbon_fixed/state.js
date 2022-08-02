@@ -3,8 +3,8 @@ var wan_route_x = '<% nvram_get_x("", "wan_route_x"); %>';
 var wan_proto = '<% nvram_get_x("", "wan_proto"); %>';
 var lan_proto = '<% nvram_get_x("", "lan_proto_x"); %>';
 var log_float = '<% nvram_get_x("", "log_float_ui"); %>';
-var reboot_schedule_support = '<% nvram_get_x("", "reboot_schedule_enable"); %>';
-var ss_schedule_support = '<% nvram_get_x("", "ss_schedule_enable"); %>';
+var www_L8x = '<% nvram_get_x("", "www_L8x"); %>';
+var www_L9x = '<% nvram_get_x("", "www_L9x"); %>';
 var log_stamp = 0;
 var sysinfo = <% json_system_status(); %>;
 var uptimeStr = "<% uptime(); %>";
@@ -17,7 +17,9 @@ var cookie_pref = 'n56u_cookie_';
 var uagent = navigator.userAgent.toLowerCase();
 var is_ie11p = (/trident\/7\./).test(uagent);
 var is_mobile = (/iphone|ipod|ipad|iemobile|android|blackberry|fennec/).test(uagent);
+var is_msie = (/msie/).test(uagent);
 
+var new_ss_internet = '<% nvram_get_x("", "ss_internet"); %>';
 var new_wan_internet = '<% nvram_get_x("", "link_internet"); %>';
 var id_check_status = 0;
 var id_system_info = 0;
@@ -74,10 +76,25 @@ function update_internet_status(){
 		showMapWANStatus(0);
 }
 
+function update_ss_internet_status(){
+	if (new_ss_internet == '1')
+		showMapSSStatus(1);
+	else if(new_ss_internet == '2')
+		showMapSSStatus(2);
+	else
+		showMapSSStatus(0);
+}
+
 function notify_status_internet(wan_internet){
 	this.new_wan_internet = wan_internet;
 	if((location.pathname == "/" || location.pathname == "/index.asp") && (typeof(update_internet_status) === 'function'))
 		update_internet_status();
+}
+
+function notify_status_ss_internet(ss_internet){
+	this.new_ss_internet = ss_internet;
+	if((location.pathname == "/" || location.pathname == "/index.asp") && (typeof(update_ss_internet_status) === 'function'))
+		update_ss_internet_status();
 }
 
 function notify_status_vpn_client(vpnc_state){
@@ -97,6 +114,7 @@ function get_changed_status(){
 		},
 		success: function(response) {
 			notify_status_internet(now_wan_internet);
+			notify_status_ss_internet(now_ss_internet);
 			notify_status_vpn_client(now_vpnc_state);
 			enableCheckChangedStatus();
 		}
@@ -204,6 +222,19 @@ function showSystemInfo(cpu_now,force){
 		$j('#wifi5_b').addClass('btn-info');
 	else
 		$j('#wifi5_b').removeClass('btn-info');
+		
+	if(parseInt(sysinfo.wifi2.button) > 0)
+		$j('#button_script1').addClass('btn-info');
+	else
+		$j('#button_script1').removeClass('btn-info');
+		
+	if(parseInt(sysinfo.wifi5.button) > 0)
+		$j('#button_script2').addClass('btn-info');
+	else
+		$j('#button_script2').removeClass('btn-info');
+
+	$j('#button_script1').val(sysinfo.wifi2.info);
+	$j('#button_script2').val(sysinfo.wifi5.info);
 
 	if(parseInt(sysinfo.wifi2.guest) > 0)
 		$j('#wifi2_b_g').addClass('btn-info');
@@ -227,6 +258,17 @@ var enabled5Gclass = '<% nvram_match_x("","wl_radio_x", "1", "btn-info"); %>';
 var enabledGuest2Gclass = '<% nvram_match_x("","rt_guest_enable", "1", "btn-info"); %>';
 var enabledGuest5Gclass = '<% nvram_match_x("","wl_guest_enable", "1", "btn-info"); %>';
 var enabledBtnCommit = '<% nvram_match_x("","nvram_manual", "0", "display:none;"); %>';
+var enabledBtnshellinabox = '<% nvram_match_x("","shellinabox_enable", "0", "display:none;"); %>';
+
+var button_script_1 = '';
+var button_script_2 = '';
+var button_script_1_s = '<% nvram_get_x("", "button_script_1_s"); %>';
+var button_script_2_s = '<% nvram_get_x("", "button_script_2_s"); %>';
+
+if ('<% nvram_get_x("", "button_script_1_s"); %>' == '')
+	var button_script_1_s = 'Adbyby';
+if ('<% nvram_get_x("", "button_script_2_s"); %>' == '')
+	var button_script_2_s = 'SS';
 
 // L3 = The third Level of Menu
 function show_banner(L3){
@@ -707,24 +749,63 @@ function show_menu(L1, L2, L3){
 		}
 	}
 
+//var www_L8x =1 ;
+//var www_L9x =1 ;
+
 	for(i = 1; i <= menuL1_title.length-1; i++){
 		if(menuL1_title[i] == "")
 			continue;
-		else if(L1 == i && L2 <= 0)
+		else if(L1 == i && L2 <= 0){
+			if (L1 == 8 && www_L8x != 1){
+				menu1_code +='<ul><li><div id="subMenu1" class="accordion" style="width:212px;">';
+				for(var j = 1; j <= 10; ++j){
+				if(menuL2_title[j] == "")
+					continue;
+				else if(L2 == j)
+					menu1_code += '<a href="javascript: void(0)" style="color: #005580; font-weight: bold"><i class="icon-minus"></i>&nbsp;&nbsp;'+menuL2_title[j]+'</a>\n';
+				else
+					menu1_code += '<a id="menuL2_link_'+j+'" href="'+menuL2_link[j]+'"><i class="icon-minus"></i>&nbsp;&nbsp;'+menuL2_title[j]+'</a>\n';
+				};
+				menu1_code += '</div></li></ul>';
+			};
 			menu1_code += '<li class="active" id="option'+i+'"><a href="javascript:;"><i class="'+menuL1_icon[i]+'"></i>&nbsp;&nbsp;'+menuL1_title[i]+'</a></li>\n';
-		else
-			menu1_code += '<li id="option'+i+'"><a href="'+menuL1_link[i]+'" title="'+menuL1_link[i]+'"><i class="'+menuL1_icon[i]+'"></i>&nbsp;&nbsp;'+menuL1_title[i]+'</a></li>\n';
+		}else
+			if (i==8){
+				if (L1 != 8 || www_L8x != 1){
+					menu1_code +='<ul><li><div id="subMenu1" class="accordion" style="width:212px;">';
+					for(var j = 1; j <= 10; ++j){
+					if(menuL2_title[j] == "")
+						continue;
+					else if(L2 == j)
+						menu1_code += '<a href="javascript: void(0)" style="color: #005580; font-weight: bold"><i class="icon-minus"></i>&nbsp;&nbsp;'+menuL2_title[j]+'</a>\n';
+					else
+						menu1_code += '<a id="menuL2_link_'+j+'" href="'+menuL2_link[j]+'"><i class="icon-minus"></i>&nbsp;&nbsp;'+menuL2_title[j]+'</a>\n';
+					};
+					menu1_code += '</div></li></ul>';
+				};
+				if(L1 == i && L2 <= 0)
+					menu1_code += '<li class="active" id="option'+i+'"><a href="javascript:;"><i class="'+menuL1_icon[i]+'"></i>&nbsp;&nbsp;'+menuL1_title[i]+'</a></li>\n';
+				else
+					menu1_code += '<li id="option'+i+'"><a href="'+menuL1_link[i]+'" title="'+menuL1_link[i]+'"><i class="'+menuL1_icon[i]+'"></i>&nbsp;&nbsp;'+menuL1_title[i]+'</a></li>\n';
+				
+		}else{
+				menu1_code += '<li id="option'+i+'"><a href="'+menuL1_link[i]+'" title="'+menuL1_link[i]+'"><i class="'+menuL1_icon[i]+'"></i>&nbsp;&nbsp;'+menuL1_title[i]+'</a></li>\n';
+		
+		};
+
 	}
 
 	$("mainMenu").innerHTML = menu1_code;
 
-	for(var i = 1; i <= menuL2_title.length-1; ++i){
+	for(var i = 11; i <= menuL2_title.length-1; ++i){
 		if(menuL2_title[i] == "")
+			continue;
+		if(L1 != 8 && www_L9x == 1)
 			continue;
 		else if(L2 == i)
 			menu2_code += '<a href="javascript: void(0)" style="color: #005580; font-weight: bold"><i class="icon-minus"></i>&nbsp;&nbsp;'+menuL2_title[i]+'</a>\n';
 		else
-			menu2_code += '<a href="'+menuL2_link[i]+'"><i class="icon-minus"></i>&nbsp;&nbsp;'+menuL2_title[i]+'</a>\n';
+			menu2_code += '<a id="menuL2_link_'+i+'" href="'+menuL2_link[i]+'"><i class="icon-minus"></i>&nbsp;&nbsp;'+menuL2_title[i]+'</a>\n';
 	}
 	$("subMenu").innerHTML = menu2_code;
 

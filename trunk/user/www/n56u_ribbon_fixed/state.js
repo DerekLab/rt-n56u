@@ -687,6 +687,10 @@ function show_menu(L1, L2, L3){
 			tabtitle[5].splice(4,2);
 			tablink[5].splice(4,2);
 		}
+		if(!support_print()){
+			tabtitle[5].splice(5,1);
+			tablink[5].splice(5,1);
+		}
 		if(!found_app_smbd() && !found_app_ftpd()){
 			tabtitle[5].splice(2,2);
 			tablink[5].splice(2,2);

@@ -779,6 +779,7 @@ menu4=网络流量
 menu5=高级设置
 menu7=扩展功能
 menu5_title=高级设置
+menu7_title=扩展功能
 menu5_1=无线网络
 menu5_11=无线 2.4G
 menu5_12=无线 5G

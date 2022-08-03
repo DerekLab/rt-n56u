@@ -163,13 +163,6 @@
 	</tr>
 	<tr>
 		<td align=center>23</td>
-		<td align=left>lldt</td>
-		<td align=center>v1.0</td>
-		<td align=left>标签1</td>
-		<td align=left></td>
-	</tr>
-	<tr>
-		<td align=center>24</td>
 		<td align=left>scripts</td>
 		<td align=center>v1.0</td>
 		<td align=left>标签1</td>

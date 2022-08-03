@@ -30,8 +30,8 @@ function show_sitemap(){
 	var l1 = tabtitle.length;
 	var l2 = menuL2_title.length;
 
-	if (l1 > 16) l1 = 16;
-	if (l2 > 16) l2 = 16;
+	if (l1 > 20) l1 = 20;
+	if (l2 > 20) l2 = 20;
 
 	for(var i=10, j=10; i<l1, j<l2;){
 		if(tabtitle[i] == ""){
@@ -47,16 +47,16 @@ function show_sitemap(){
 	}
 
 	l2 = menuL2_title.length;
-	if (l2 > 16) l2 = 16;
+	if (l2 > 20) l2 = 20;
 
 	for(var i=10; i<l2; i++){
-		var k = (i/4 < 1)?0:3;
-		$("menu_body").rows[k].cells[i%4].innerHTML = "<b>" + menuL2_title[i] + "</b>";
-		$("menu_body").rows[k].cells[i%4].className = "head";
+		var k = (i/5 < 1)?0:3;
+		$("menu_body").rows[k].cells[i%5].innerHTML = "<b>" + menuL2_title[i] + "</b>";
+		$("menu_body").rows[k].cells[i%5].className = "head";
 	}
 
 	l1 = tabtitle.length;
-	if (l1 > 16) l1 = 16;
+	if (l1 > 20) l1 = 20;
 
 	for(var l = 10; l < l1; l++){
 		map_code = '<ul class="nav nav-list">\n';
@@ -71,8 +71,8 @@ function show_sitemap(){
 		}
 		map_code += '</ul>\n';
 		
-		var n = (l/4 < 1)?0:3;
-		$("menu_body").rows[n+2].cells[l%4].innerHTML = map_code;
+		var n = (l/5 < 1)?0:3;
+		$("menu_body").rows[n+2].cells[l%5].innerHTML = map_code;
 	}
 }
 </script>
@@ -121,7 +121,7 @@ function show_sitemap(){
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="box well grad_colour_dark_blue">
-                            <h2 class="box_head round_top"><#menu5_title#></h2>
+                            <h2 class="box_head round_top"><#menu7_title#></h2>
                             <div class="round_bottom">
 
                                 <div class="row-fluid">
@@ -132,10 +132,11 @@ function show_sitemap(){
                                             <td style="border-top: 0 none;">
                                                 <table id="menu_body" width="100%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC" class="sitemap">
                                                     <tr>
-                                                        <td width="25%">&nbsp;</td>
-                                                        <td width="25%">&nbsp;</td>
-                                                        <td width="25%">&nbsp;</td>
-                                                        <td width="25%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
                                                     </tr>
 
                                                     <tr style="display: none;">
@@ -143,9 +144,11 @@ function show_sitemap(){
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
                                                     </tr>
 
                                                     <tr valign="top">
+                                                        <td height="120"></td>
                                                         <td height="120"></td>
                                                         <td height="120"></td>
                                                         <td height="120"></td>
@@ -157,16 +160,19 @@ function show_sitemap(){
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
                                                     </tr>
 
                                                     <tr style="display: none;">
-                                                        <td width="25%">&nbsp;</td>
-                                                        <td width="25%">&nbsp;</td>
-                                                        <td width="25%">&nbsp;</td>
-                                                        <td width="25%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
+                                                        <td width="20%">&nbsp;</td>
                                                     </tr>
 
                                                     <tr valign="top">
+                                                        <td height="120"></td>
                                                         <td height="120"></td>
                                                         <td height="120"></td>
                                                         <td height="120"></td>

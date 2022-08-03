@@ -21,7 +21,7 @@ var map_code = "";
 
 function initial(){
 	show_banner(0);
-	show_menu(7,0,0);
+	show_menu(8,0,0);
 	show_footer();
 	show_sitemap();
 }
@@ -33,7 +33,7 @@ function show_sitemap(){
 	if (l1 > 20) l1 = 20;
 	if (l2 > 20) l2 = 20;
 
-	for(var i=10, j=10; i<l1, j<l2;){
+	for(var i=10, j=11; i<l1, j<l2;){
 		if(tabtitle[i] == ""){
 			tabtitle.splice(i,1);
 			tablink.splice(i,1);
@@ -49,7 +49,7 @@ function show_sitemap(){
 	l2 = menuL2_title.length;
 	if (l2 > 20) l2 = 20;
 
-	for(var i=10; i<l2; i++){
+	for(var i=11; i<l2; i++){
 		var k = (i/5 < 1)?0:3;
 		$("menu_body").rows[k].cells[i%5].innerHTML = "<b>" + menuL2_title[i] + "</b>";
 		$("menu_body").rows[k].cells[i%5].className = "head";

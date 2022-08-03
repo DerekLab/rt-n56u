@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - <#menu5_title#></title>
+<title><#Web_Title#> - <#menu7_title#></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -30,7 +30,7 @@ function show_sitemap(){
 	var l1 = tabtitle.length;
 	var l2 = menuL2_title.length;
 
-	if (l1 > 8) l1 = 8;
+	if (l1 > 10) l1 = 10;
 	if (l2 > 10) l2 = 10;
 
 	for(var i=0, j=0; i<l1, j<l2;){
@@ -56,7 +56,7 @@ function show_sitemap(){
 	}
 
 	l1 = tabtitle.length;
-	if (l1 > 8) l1 = 8;
+	if (l1 > 10) l1 = 10;
 
 	for(var l = 0; l < l1; l++){
 		map_code = '<ul class="nav nav-list">\n';

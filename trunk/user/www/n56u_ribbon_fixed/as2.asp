@@ -50,9 +50,9 @@ function show_sitemap(){
 	if (l2 > 20) l2 = 20;
 
 	for(var i=10; i<l2; i++){
-		var k = (i/5 < 1)?0:3;
-		$("menu_body").rows[k].cells[i%5].innerHTML = "<b>" + menuL2_title[i] + "</b>";
-		$("menu_body").rows[k].cells[i%5].className = "head";
+		var k = ((i-10)/5 < 1)?0:3;
+		$("menu_body").rows[k].cells[(i-10)%5].innerHTML = "<b>" + menuL2_title[i] + "</b>";
+		$("menu_body").rows[k].cells[(i-10)%5].className = "head";
 	}
 
 	l1 = tabtitle.length;
@@ -71,8 +71,8 @@ function show_sitemap(){
 		}
 		map_code += '</ul>\n';
 		
-		var n = (l/5 < 1)?0:3;
-		$("menu_body").rows[n+2].cells[l%5].innerHTML = map_code;
+		var n = ((l-10)/5 < 1)?0:3;
+		$("menu_body").rows[n+2].cells[(l-10)%5].innerHTML = map_code;
 	}
 }
 </script>

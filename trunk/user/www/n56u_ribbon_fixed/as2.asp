@@ -33,7 +33,7 @@ function show_sitemap(){
 	if (l1 > 20) l1 = 20;
 	if (l2 > 20) l2 = 20;
 
-	for(var i=10, j=11; i<l1, j<l2;){
+	for(var i=0, j=0; i<l1, j<l2;){
 		if(tabtitle[i] == ""){
 			tabtitle.splice(i,1);
 			tablink.splice(i,1);
@@ -49,7 +49,7 @@ function show_sitemap(){
 	l2 = menuL2_title.length;
 	if (l2 > 20) l2 = 20;
 
-	for(var i=11; i<l2; i++){
+	for(var i=10; i<l2; i++){
 		var k = (i/5 < 1)?0:3;
 		$("menu_body").rows[k].cells[i%5].innerHTML = "<b>" + menuL2_title[i] + "</b>";
 		$("menu_body").rows[k].cells[i%5].className = "head";
@@ -58,7 +58,7 @@ function show_sitemap(){
 	l1 = tabtitle.length;
 	if (l1 > 20) l1 = 20;
 
-	for(var l = 10; l < l1; l++){
+	for(var l=10; l < l1; l++){
 		map_code = '<ul class="nav nav-list">\n';
 		for(var m = 1; m < tabtitle[l].length; m++){
 			if(tablink[l][m] == "")

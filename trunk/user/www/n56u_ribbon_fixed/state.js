@@ -503,63 +503,63 @@ tablink[9] = new Array("", "Main_LogStatus_Content.asp", "Main_DHCPStatus_Conten
 tablink[10] = new Array();
 if (found_app_scutclient()){
 	scutclient_array = new Array("", "scutclient.asp", "scutclient_log.asp");
-	tablink[10].push(scutclient_array);
+	tablink[10].push(scutclient_array[1]);
 }
 tablink[11] = new Array();
 if (found_app_dnsforwarder()){
 	dns_forwarder_array = new Array("", "dns-forwarder.asp");
-	tablink[11].push(dns_forwarder_array);
+	tablink[11].push(dns_forwarder_array[1]);
 }
 tablink[12] = new Array();
 if (found_app_shadowsocks()){
 	shadowsocks_array = new Array("", "Shadowsocks.asp","Shadowsocks_log.asp");
-	tablink[12].push(shadowsocks_array);
+	tablink[12].push(shadowsocks_array[1]);
 }
 tablink[13] = new Array();
 if (found_app_mentohust()){
 	mentohust_array = new Array("", "mentohust.asp","mentohust_log.asp");
-	tablink[13].push(mentohust_array);
+	tablink[13].push(mentohust_array[1]);
 }
 tablink[14] = new Array();
 if (found_app_adbyby()){
 	ad_array = new Array("","Advanced_adbyby.asp");
-	tablink[14].push(ad_array);
+	tablink[14].push(ad_array[1]);
 }else if (found_app_koolproxy()){
 	kp_array = new Array("","Advanced_koolproxy.asp");
-	tablink[14].push(kp_array);
+	tablink[14].push(kp_array[1]);
 }
 tablink[15] = new Array();
 if (found_app_smartdns()){
 	smartdns_array = new Array("","Advanced_smartdns.asp");
-	tablink[15].push(smartdns_array);
+	tablink[15].push(smartdns_array[1]);
 }else if (found_app_adguardhome()){
 	adg_array = new Array("","Advanced_adguardhome.asp");
-	tablink[15].push(adg_array);
+	tablink[15].push(adg_array[1]);
 }
 tablink[16] = new Array();
 if (found_app_aliddns()){
 	aliddns_array = new Array("","Advanced_aliddns.asp");
-	tablink[16].push(aliddns_array);
+	tablink[16].push(aliddns_array[1]);
 }else if (found_app_zerotier()){
 	zerotier_array = new Array("","Advanced_zerotier.asp");
-	tablink[16].push(zerotier_array);
+	tablink[16].push(zerotier_array[1]);
 }
 tablink[17] = new Array();
 if (found_app_frp()){
 	frp_array = new Array("","Advanced_frp.asp");
-	tablink[17] = (frp_array);
+	tablink[17] = (frp_array[1]);
 	tabtitle[9].push('<#menu5_25_1#>');
 	tablink[9].push('Advanced_frp_log.asp');
 }
 tablink[18] = new Array();
 if (found_app_caddy()){
 	caddy_array = new Array("","Advanced_caddy.asp");
-	tablink[18].push(caddy_array);
+	tablink[18].push(caddy_array[1]);
 }
 tablink[19] = new Array();
 if (found_app_wyy()){
 	wyy_array = new Array("","Advanced_wyy.asp");
-	tablink[19].push(wyy_array);
+	tablink[19].push(wyy_array[1]);
 }
 
 //Level 2 Menu

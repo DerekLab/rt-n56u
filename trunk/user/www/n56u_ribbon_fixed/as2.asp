@@ -67,6 +67,9 @@ function show_sitemap(){
 			map_code += '    <li>\n';
 			map_code += '        <a href="'+tablink[l][m]+'">'
 			map_code += tabtitle[l][m];
+			map_code += '/l=' + l;
+        		map_code += '/m=' + m;
+        		map_code += '/ip=' + tablink[l][m];
 			map_code += '</a>\n    </li>\n';
 		}
 		map_code += '</ul>\n';

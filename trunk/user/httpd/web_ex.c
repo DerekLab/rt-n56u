@@ -2603,6 +2603,21 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_xupnpd = 0;
 #endif
+#if defined(APP_SOCAT)
+	int found_app_socat = 1;
+#else
+	int found_app_socat = 0;
+#endif
+#if defined(APP_ARIA2)
+	int found_app_aria2 = 1;
+#else
+	int found_app_aria2 = 0;
+#endif
+#if defined(APP_TRANSMISSION)
+	int found_app_transmission = 1;
+#else
+	int found_app_transmission = 0;
+#endif
 #if defined(USE_IPV6)
 	int has_ipv6 = 1;
 #else
@@ -2796,6 +2811,9 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function found_app_inadyn() { return %d;}\n"
 		"function found_app_aliddns() { return %d;}\n"
 		"function found_app_xupnpd() { return %d;}\n"
+        "function found_app_socat() { return %d;}\n"
+        "function found_app_aria2() { return %d;}\n"
+        "function found_app_transmission() { return %d;}\n"
 		"function found_app_mentohust() { return %d;}\n",
 		found_utl_hdparm,
 		found_app_ovpn,
@@ -2830,6 +2848,9 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		found_app_inadyn,
 		found_app_aliddns,
 		found_app_xupnpd,
+        found_app_socat,
+        found_app_aria2,
+        found_app_transmission,
 		found_app_mentohust
 	);
 
@@ -4629,4 +4650,3 @@ struct ej_handler ej_handlers[] =
 	{ "openvpn_cli_cert_hook", openvpn_cli_cert_hook},
 	{ NULL, NULL }
 };
-

@@ -32,11 +32,11 @@ $j(document).ready(function() {
 });
 
 </script>
-		<script>
+<script>
 
-			function initial(){
+function initial(){
 	show_banner(1);
-	 show_menu(8,<% nvram_get_x("", "shellinabox_L2"); %>,<% nvram_get_x("", "shellinabox_L3"); %>);
+	show_menu(8,<% nvram_get_x("", "shellinabox_L2"); %>,<% nvram_get_x("", "shellinabox_L3"); %>);
 	show_footer();
 	shellinabox_enable_bridge();
 }
@@ -102,9 +102,7 @@ function shellinabox_enable_bridge(){
 
 </script>
 	</head>
-
 	<body onload="initial();" onunLoad="return unload_body();">
-
 		<div class="wrapper">
 			<div class="container-fluid" style="padding-right: 0px">
 				<div class="row-fluid">
@@ -118,13 +116,9 @@ function shellinabox_enable_bridge(){
 					</div>
 				</div>
 			</div>
-
 			<div id="Loading" class="popup_bg"></div>
-
 			<iframe name="hidden_frame" id="hidden_frame" src="" width="0" height="0" frameborder="0"></iframe>
-
 			<form method="post" name="form" id="ruleForm" action="/start_apply.htm" target="hidden_frame">
-
 				<input type="hidden" name="current_page" value="Advanced_Extensions_shellinabox.asp">
 				<input type="hidden" name="next_page" value="">
 				<input type="hidden" name="next_host" value="">
@@ -136,7 +130,6 @@ function shellinabox_enable_bridge(){
 				<input type="hidden" name="wan_netmask" value="<% nvram_get_x("", " wan0_netmask"); %>" readonly="1">
 				<input type="hidden" name="dhcp_start" value="<% nvram_get_x("", " dhcp_start"); %>">
 				<input type="hidden" name="dhcp_end" value="<% nvram_get_x("", " dhcp_end"); %>">
-
 				<div class="container-fluid">
 					<div class="row-fluid">
 						<div class="span3">
@@ -151,7 +144,6 @@ function shellinabox_enable_bridge(){
 								</ul>
 							</div>
 						</div>
-
 						<div class="span9">
 							<!--Body content-->
 							<div class="row-fluid">

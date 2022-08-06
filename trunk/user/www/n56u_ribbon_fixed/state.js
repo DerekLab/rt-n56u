@@ -489,14 +489,14 @@ tablink[6] = new Array("", "Advanced_System_Content.asp", "Advanced_Services_Con
 tablink[7] = new Array("", "Advanced_Tweaks_Content.asp", "Advanced_Scripts_Content.asp", "Advanced_InetDetect_Content.asp");
 tablink[8] = new Array("", "Main_WStatus2g_Content.asp", "Main_WStatus_Content.asp", "", "", "", "", "", "", "", "");
 tablink[9] = new Array("", "Main_LogStatus_Content.asp", "Main_DHCPStatus_Content.asp", "Main_IPTStatus_Content.asp", "Main_RouteStatus_Content.asp", "Main_CTStatus_Content.asp");
-tablink[10] = new Array("", "Advanced_web.asp");
+tablink[10] = new Array("", "Extensions_Configure_Content.asp");
 tablink[11] = new Array();
 if (found_app_shadowsocks()){
 	tablink[11].push("", "Shadowsocks.asp","Shadowsocks_log.asp");
 }
 tablink[12] = new Array();
 if (found_app_socat()){
-	tablink[12].push("","");
+	tablink[12].push("","Extensions_WebTerminal_Content.asp");
 }
 tablink[13] = new Array();
 if (found_app_aliddns()){
@@ -625,8 +625,8 @@ if (found_app_caddy()){
 } else menuL2_link.push("");
 
 //Level 1 Menu in Gateway, Router mode
-menuL1_title = new Array("", "<#menu1#>", "<#menu3#>", "<#menu2#>", "<#menu6#>", "<#menu4#>", "<#menu5_8#>", "<#menu5#>", "<#menu7#>");
-menuL1_link = new Array("", "index.asp", "aidisk.asp", "vpnsrv.asp", "vpncli.asp", "Main_TrafficMonitor_realtime.asp", "Advanced_System_Info.asp", "as.asp", "as2.asp");
+menuL1_title = new Array("", "<#menu1#>", "<#menu3#>", "<#menu2#>", "<#menu6#>", "<#menu4#>", "<#menu5_8#>", "<#menu5#>", "<#menu8#>");
+menuL1_link = new Array("", "index.asp", "aidisk.asp", "vpnsrv.asp", "vpncli.asp", "Main_TrafficMonitor_realtime.asp", "Advanced_System_Info.asp", "as.asp", "es.asp");
 menuL1_icon = new Array("", "icon-home", "icon-hdd", "icon-retweet", "icon-globe", "icon-tasks", "icon-random", "icon-wrench", "icon-th");
 
 function show_menu(L1, L2, L3){
